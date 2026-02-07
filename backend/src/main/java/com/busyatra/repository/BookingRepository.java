@@ -1,0 +1,13 @@
+package com.busyatra.repository;
+
+import com.busyatra.entity.Booking;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface BookingRepository extends JpaRepository<Booking, Integer> {
+//    List<Booking> findByEmail(String email);
+List<Booking> findByEmail(String email);
+
+
+}
