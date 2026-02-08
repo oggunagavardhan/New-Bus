@@ -17,28 +17,31 @@ export default function Admin() {
   /* ================= LOAD DATA ================= */
 
   const loadBookings = async () => {
-    const res = await fetch("/api/admin/bookings");
+    const res = await fetch("https://new-bus-1.onrender.com/api/admin/bookings");
     setBookings(await res.json());
   };
 
   const loadUsers = async () => {
-    const res = await fetch("/api/admin/users");
+    const res = await fetch("https://new-bus-1.onrender.com/api/admin/users");
     setUsers(await res.json());
   };
 
   const loadSeats = async () => {
     if (!busId) return;
 
-    const res = await fetch(`/api/admin/seats/${busId}`);
+    const res = await fetch(
+      `https://new-bus-1.onrender.com/api/admin/seats/${busId}`
+    );
     setSeats(await res.json());
   };
 
   /* ================= APPROVE PAYMENT ================= */
   const approve = async (id) => {
 
-    await fetch(`/api/booking/approve/${id}`, {
-      method: "POST"
-    });
+    await fetch(
+      `https://new-bus-1.onrender.com/api/booking/approve/${id}`,
+      { method: "POST" }
+    );
 
     loadBookings();
   };
@@ -46,9 +49,10 @@ export default function Admin() {
   /* ================= BLOCK USER ================= */
   const blockUser = async (id) => {
 
-    await fetch(`/api/admin/block-user/${id}`, {
-      method: "PUT"
-    });
+    await fetch(
+      `https://new-bus-1.onrender.com/api/admin/block-user/${id}`,
+      { method: "PUT" }
+    );
 
     loadUsers();
   };
@@ -56,11 +60,14 @@ export default function Admin() {
   /* ================= TOGGLE SEAT ================= */
   const toggleSeat = async (seat) => {
 
-    await fetch(`/api/admin/update-seat/${seat.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ booked: !seat.booked })
-    });
+    await fetch(
+      `https://new-bus-1.onrender.com/api/admin/update-seat/${seat.id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ booked: !seat.booked })
+      }
+    );
 
     loadSeats();
   };
@@ -75,7 +82,6 @@ export default function Admin() {
 
       <h2>Admin Dashboard</h2>
 
-      {/* NAV */}
       <div className="admin-nav">
         <button onClick={() => setTab("dashboard")}>Dashboard</button>
         <button onClick={() => setTab("payments")}>Payments</button>
@@ -83,7 +89,6 @@ export default function Admin() {
         <button onClick={() => setTab("users")}>Users</button>
       </div>
 
-      {/* ================= DASHBOARD ================= */}
       {tab === "dashboard" && (
         <div>
           <div className="card">
@@ -103,7 +108,6 @@ export default function Admin() {
         </div>
       )}
 
-      {/* ================= PAYMENT APPROVAL ================= */}
       {tab === "payments" && (
         <div>
 
@@ -129,7 +133,6 @@ export default function Admin() {
         </div>
       )}
 
-      {/* ================= SEAT EDITOR ================= */}
       {tab === "seats" && (
         <div>
 
@@ -158,7 +161,6 @@ export default function Admin() {
         </div>
       )}
 
-      {/* ================= USERS ================= */}
       {tab === "users" && (
         <div>
 

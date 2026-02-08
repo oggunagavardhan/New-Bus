@@ -34,7 +34,7 @@ export default function Users() {
 
     if (!fromCity || !toCity) return;
 
-    const res = await fetch(`/api/bus/search?from=${fromCity}&to=${toCity}`);
+    const res = await fetch(`https://new-bus-1.onrender.com/api/bus/search?from=${fromCity}&to=${toCity}`);
     setBuses(await res.json());
     setScreen("buslist");
   };
@@ -45,7 +45,7 @@ export default function Users() {
   setSelectedSeatIds([]);
   setScreen("seats");
 
-  const res = await fetch(`/api/seats/${bus.id}`);
+  const res = await fetch(`https://new-bus-1.onrender.com/api/seats/${bus.id}`);
   const data = await res.json();
 
   // handle BOTH backend formats safely
@@ -96,7 +96,7 @@ export default function Users() {
       upiId: utr
     };
 
-    const res = await fetch("/api/booking/book", {
+    const res = await fetch("https://new-bus-1.onrender.com/api/booking/book", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -116,7 +116,7 @@ export default function Users() {
 
     const timer = setInterval(async () => {
 
-      const res = await fetch(`/api/booking/${booking.id}`);
+      const res = await fetch(`https://new-bus-1.onrender.com/api/booking/${booking.id}`);
       const updated = await res.json();
 
       setBooking(updated);
