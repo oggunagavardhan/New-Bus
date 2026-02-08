@@ -10,7 +10,7 @@ import com.busyatra.entity.BusSeat;
 
 @RestController
 @RequestMapping("/api/seats")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 public class SeatController {
 
     private final BusSeatRepository seatRepo;
