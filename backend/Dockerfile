@@ -1,11 +1,16 @@
-FROM maven:3.9.9-eclipse-temurin-17
+# Stage 1 - Build Jar
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
-
 COPY . .
-
 RUN mvn clean package -DskipTests
 
-EXPOSE 8080
 
-CMD ["java", "-jar", "target/*.jar"]
+# Stage 2 - Run Jar
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
